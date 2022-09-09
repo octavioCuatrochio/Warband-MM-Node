@@ -1,5 +1,6 @@
-import { QMainWindow, QWidget, QBoxLayout, QPixmap, QLabel, QImage } from '@nodegui/nodegui';
-import logo from '../assets/a.png';
+import { QMainWindow, QWidget, QBoxLayout, QPixmap, QLabel, QPushButton, QIcon } from '@nodegui/nodegui';
+import logo from '../assets/images/a.png';
+import settings from '../assets/icons/settings.png';
 
 const c_basic = "#222831";
 const c_secondary = "#393E46";
@@ -35,12 +36,17 @@ imgLabel.setMinimumSize(100, headerContainer.height() - 5);
 
 const headerText = new QLabel();
 headerText.setText("Warband Mod Manager");
-headerText.setInlineStyle("font-size: 20px; font-weight:bold; color:" + c_white + " ;margin-left:45px;");
-headerText.resize(300, headerContainer.height());
+headerText.setObjectName("headerText");
+headerText.setInlineStyle("");
+headerText.resize(headerContainer.width(), headerContainer.height());
 
 headerText.setParent(headerContainer);
 imgLabel.setParent(headerContainer);
 headerContainer.setParent(top);
+
+const settingsBtn = new QPushButton();
+settingsBtn.setIcon(new QIcon(settings));
+settingsBtn.setParent(top);
 
 
 root.setStyleSheet(`
@@ -50,7 +56,14 @@ root.setStyleSheet(`
   #top {
     border-bottom: 2px solid ${c_highlight};
   }
+  #headerText {
+    font-size: 20px;
+    font-weight:bold;
+    color: ${c_white};
+    margin-left:45px;
+  }
 `);
+
 const win = new QMainWindow();
 win.setWindowTitle("Warband Mod Manager");
 win.resize(WIDTH, HEIGHT);
